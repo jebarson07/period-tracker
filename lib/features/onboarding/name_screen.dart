@@ -2,7 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-/// Nilah onboarding screen 2: "What should I call you?"
+import '../../core/app_colors.dart';
+
+/// Luna onboarding screen 2: "What should I call you?"
 ///
 /// The illustration is drawn in code. To use your own artwork instead,
 /// add a PNG at [_illustrationAsset] and declare it in pubspec.yaml.
@@ -36,16 +38,16 @@ class _NameScreenState extends State<NameScreen>
   late final AnimationController _float;
   bool _showError = false;
 
-  static const _plum = Color(0xFF7A4A6E);
-  static const _subtitle = Color(0xFF8C6483);
-  static const _purple = Color(0xFFA06BD6);
+  static const _plum = AppColors.text;
+  static const _subtitle = AppColors.textMuted;
+  static const _purple = AppColors.primary;
 
   @override
   void initState() {
     super.initState();
     _float = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 6),
+      duration: const Duration(seconds: 10),
     )..repeat();
   }
 
@@ -91,8 +93,8 @@ class _NameScreenState extends State<NameScreen>
               end: Alignment.bottomCenter,
               colors: [
                 Color(0xFFFDEFF3),
-                Color(0xFFFFF3F1),
-                Color(0xFFFCEFEA),
+                AppColors.background,
+                Color(0xFFF1E4F6),
               ],
             ),
           ),
@@ -156,7 +158,7 @@ class _NameScreenState extends State<NameScreen>
                           child: Image.asset(
                             _illustrationAsset,
                             height: 160,
-                            errorBuilder: (_, __, ___) => const SizedBox(
+                            errorBuilder: (_, _, _) => const SizedBox(
                               width: 210,
                               height: 160,
                               child: CustomPaint(painter: _GirlPainter()),
@@ -197,7 +199,7 @@ class _NameScreenState extends State<NameScreen>
                             'Tell me what to call you 🌸',
                             style: TextStyle(
                               fontSize: 13,
-                              color: Color(0xFFC0508A),
+                              color: Color(0xFFB3426B),
                             ),
                           ),
                         ),
@@ -251,9 +253,9 @@ class _NameScreenState extends State<NameScreen>
           builder: (context, child) {
             final t = _float.value * 2 * math.pi + phase;
             return Transform.translate(
-              offset: Offset(math.sin(t) * 4, math.sin(t * 1.3) * 8),
+              offset: Offset(math.sin(t) * 3, math.sin(t) * 5),
               child: Transform.rotate(
-                angle: rotation + math.sin(t) * 0.12,
+                angle: rotation + math.sin(t) * 0.06,
                 child: child,
               ),
             );
@@ -298,11 +300,11 @@ class _NameScreenState extends State<NameScreen>
           counterText: '',
           border: InputBorder.none,
           hintText: 'Enter your name',
-          hintStyle: TextStyle(fontSize: 15.5, color: Color(0xFFA18AA0)),
+          hintStyle: TextStyle(fontSize: 15.5, color: AppColors.textMuted),
           prefixIcon: Padding(
             padding: EdgeInsets.only(left: 6),
             child: Icon(Icons.person_outline_rounded,
-                size: 26, color: Color(0xFF8B5278)),
+                size: 26, color: AppColors.primary),
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 17),
         ),
@@ -315,15 +317,11 @@ class _NameScreenState extends State<NameScreen>
       width: double.infinity,
       height: 58,
       decoration: BoxDecoration(
+        color: AppColors.primary,
         borderRadius: BorderRadius.circular(29),
-        gradient: const LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [Color(0xFFA98BEB), Color(0xFFF5A3D1)],
-        ),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x55A98BEB),
+            color: Color(0x5598577F),
             blurRadius: 22,
             offset: Offset(0, 10),
           ),
@@ -377,8 +375,8 @@ class _BackButton extends StatelessWidget {
         customBorder: const CircleBorder(),
         onTap: onTap,
         child: Container(
-          width: 40,
-          height: 40,
+          width: 48,
+          height: 48,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(color: const Color(0xFFEBD9F2)),
